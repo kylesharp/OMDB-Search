@@ -1,4 +1,4 @@
-package com.kpsharp.omdbsearch.models;
+package com.kpsharp.omdbsearch.ui.models;
 
 import android.support.annotation.NonNull;
 

@@ -1,15 +1,16 @@
-package com.kpsharp.omdbsearch.movielist;
+package com.kpsharp.omdbsearch.ui.movielist;
 
-import com.kpsharp.omdbsearch.models.Movie;
+import com.kpsharp.omdbsearch.ui.base.BaseMvp;
+import com.kpsharp.omdbsearch.ui.models.Movie;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.List;
 
-public interface MovieListMvp {
+public interface MovieListMvp extends BaseMvp {
 
-    interface View {
+    interface View extends BaseView {
 
         /**
          * Tells the view to update the UI with the new list of movies
@@ -18,7 +19,7 @@ public interface MovieListMvp {
         void updateMovieList(@NonNull List<Movie> movieList);
     }
 
-    interface Presenter {
+    interface Presenter extends BasePresenter<View> {
 
         /**
          * Called when the user searches for a movie based on title

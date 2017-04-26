@@ -1,6 +1,6 @@
-package com.kpsharp.omdbsearch.movielist;
+package com.kpsharp.omdbsearch.ui.movielist;
 
-import com.kpsharp.omdbsearch.models.Movie;
+import com.kpsharp.omdbsearch.ui.models.Movie;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

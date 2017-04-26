@@ -1,8 +1,9 @@
-package com.kpsharp.omdbsearch;
+package com.kpsharp.omdbsearch.ui;
 
-import com.kpsharp.omdbsearch.models.Movie;
-import com.kpsharp.omdbsearch.movielist.MovieListAdapter;
-import com.kpsharp.omdbsearch.movielist.MovieListMvp;
+import com.kpsharp.omdbsearch.R;
+import com.kpsharp.omdbsearch.ui.models.Movie;
+import com.kpsharp.omdbsearch.ui.movielist.MovieListAdapter;
+import com.kpsharp.omdbsearch.ui.movielist.MovieListMvp;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
