@@ -1,7 +1,7 @@
 package com.kpsharp.omdbsearch.ui.movielist;
 
 import com.kpsharp.omdbsearch.R;
-import com.kpsharp.omdbsearch.ui.models.Movie;
+import com.kpsharp.omdbsearch.models.Movie;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
