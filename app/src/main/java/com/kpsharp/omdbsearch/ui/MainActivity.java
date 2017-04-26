@@ -4,6 +4,7 @@ import com.kpsharp.omdbsearch.R;
 import com.kpsharp.omdbsearch.ui.models.Movie;
 import com.kpsharp.omdbsearch.ui.movielist.MovieListAdapter;
 import com.kpsharp.omdbsearch.ui.movielist.MovieListMvp;
+import com.kpsharp.omdbsearch.ui.movielist.MovieListPresenter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity implements MovieListMvp.View
 
     private MovieListAdapter mMovieListAdapter;
 
+    private MovieListPresenter mMovieListPresenter;
+
     // endregion
 
     // region Lifecycle
@@ -35,7 +38,25 @@ public class MainActivity extends AppCompatActivity implements MovieListMvp.View
 
         setContentView(R.layout.activity_main);
 
+        mMovieListPresenter = new MovieListPresenter();
+
         loadViews();
+    }
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+
+        mMovieListPresenter.subscribeToObservables();
+    }
+
+    @Override
+    protected void onPause() {
+
+        mMovieListPresenter.unsubscribeFromObservables();
+
+        super.onPause();
     }
 
     // region Lifecycle Helpers
@@ -45,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements MovieListMvp.View
 
         ButterKnife.bind(this);
 
-        mMovieListAdapter = new MovieListAdapter();
+        mMovieListAdapter = new MovieListAdapter(this);
 
         mMovieRecyclerView.setAdapter(mMovieListAdapter);
     }
