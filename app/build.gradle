@@ -23,9 +23,13 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     def android_support_version = '25.3.1'
+    def butterknfie_version = '8.5.1'
 
     compile "com.android.support:appcompat-v7:${android_support_version}"
     compile "com.android.support:recyclerview-v7:${android_support_version}"
+
+    compile "com.jakewharton:butterknife:${butterknfie_version}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknfie_version}"
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
