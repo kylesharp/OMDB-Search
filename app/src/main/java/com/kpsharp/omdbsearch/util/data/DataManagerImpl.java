@@ -5,6 +5,7 @@ import com.kpsharp.omdbsearch.util.network.NetworkManager;
 import com.kpsharp.omdbsearch.util.network.responses.MovieSearchItem;
 import com.kpsharp.omdbsearch.util.network.responses.MovieSearchResponse;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -14,17 +15,29 @@ import io.reactivex.subjects.BehaviorSubject;
 
 public class DataManagerImpl implements DataManager {
 
+    // region Variables
+
     private NetworkManager mNetworkManager;
 
+    // IMPORTANT: Use getSearchSubscription instead of directly accessing this
     private BehaviorSubject<List<Movie>> mBehaviorSubject;
+
+    // endregion
+
+    // region Lifecycle
 
     public DataManagerImpl(NetworkManager networkManager) {
 
         mNetworkManager = networkManager;
     }
 
-    // This is a public method, but we also lazily load mBehaviorSubject, so we need to use this everywhere instead of direct access
+    // endregion
+
+    // region DataManager
+
+    // This is a public method, but we also lazily load mBehaviorSubject, so we need to use this inside this class instead of direct access
     @Override
+    @NonNull
     public BehaviorSubject<List<Movie>> getSearchSubscription() {
 
         if (mBehaviorSubject == null) {
@@ -41,8 +54,13 @@ public class DataManagerImpl implements DataManager {
         getSearchSubscription().onNext(transformNetworkResponse(mNetworkManager.searchMovies(titleQuery)));
     }
 
+    // endregion
+
+    // region Data Transforms
+
     // Transforms a network response into a model response
-    private List<Movie> transformNetworkResponse(MovieSearchResponse movieSearchResponse) {
+    @NonNull
+    private List<Movie> transformNetworkResponse(@NonNull MovieSearchResponse movieSearchResponse) {
 
         List<Movie> movieList = new ArrayList<>();
 
@@ -53,4 +71,6 @@ public class DataManagerImpl implements DataManager {
 
         return movieList;
     }
+
+    // endregion
 }

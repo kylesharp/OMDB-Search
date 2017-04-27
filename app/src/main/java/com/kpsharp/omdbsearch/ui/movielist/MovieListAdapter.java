@@ -16,11 +16,14 @@ import java.util.List;
 
 interface MovieListAdapterCallback {
 
-    void onMovieClicked(Movie movie);
+    /**
+     * Called whenever a movie item is clicked on
+     * @param movie The {@link Movie} movie the user clicked on
+     */
+    void onMovieClicked(@NonNull Movie movie);
 }
 
 public class MovieListAdapter extends RecyclerView.Adapter implements MovieListAdapterCallback {
-
 
     // region Variables
 
@@ -29,12 +32,16 @@ public class MovieListAdapter extends RecyclerView.Adapter implements MovieListA
 
     // endregion
 
-    // region RecyclerView.Adapter
+    // region Lifecycle
 
-    public MovieListAdapter(Context context) {
+    public MovieListAdapter(@NonNull Context context) {
         mContext = context;
         mMovieList = new ArrayList<>();
     }
+
+    // endregion
+
+    // region RecyclerView.Adapter
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -65,7 +72,7 @@ public class MovieListAdapter extends RecyclerView.Adapter implements MovieListA
     // region MovieListAdapterCallback
 
     @Override
-    public void onMovieClicked(Movie movie) {
+    public void onMovieClicked(@NonNull Movie movie) {
 
         Toast.makeText(mContext, "Clicked on " + movie.getTitle(), Toast.LENGTH_SHORT).show();
     }

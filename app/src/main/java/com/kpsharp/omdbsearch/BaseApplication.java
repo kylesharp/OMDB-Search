@@ -5,7 +5,13 @@ import android.content.Context;
 
 public class BaseApplication extends Application {
 
-    private static Context sContext;
+    // region Variables
+
+    private static BaseApplication sContext;
+
+    // endregion
+
+    // region Lifecycle
 
     @Override
     public void onCreate() {
@@ -15,8 +21,14 @@ public class BaseApplication extends Application {
         sContext = this;
     }
 
+    // endregion
+
+    // region Static Accessors
+
     public static Context getContext() {
 
         return sContext;
     }
+
+    // endregion
 }

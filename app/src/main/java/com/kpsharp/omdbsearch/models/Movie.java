@@ -1,6 +1,7 @@
 package com.kpsharp.omdbsearch.models;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 public class Movie {
 
@@ -13,10 +14,10 @@ public class Movie {
         mPosterUrl = "";
     }
 
-    public Movie(@NonNull String title, @NonNull String posterUrl) {
+    public Movie(@Nullable String title, @Nullable String posterUrl) {
 
-        mTitle = title;
-        mPosterUrl = posterUrl;
+        mTitle = title != null ? title : "";
+        mPosterUrl = posterUrl != null ? posterUrl : "";
     }
 
     @NonNull

@@ -2,9 +2,11 @@ package com.kpsharp.omdbsearch.util.network;
 
 import com.kpsharp.omdbsearch.util.network.responses.MovieSearchResponse;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
-import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -15,7 +17,13 @@ import static com.kpsharp.omdbsearch.util.network.NetworkConstants.BASE_URL;
 
 public class NetworkManagerImpl implements NetworkManager {
 
+    // region Variables
+
     private SearchApi mSearchApi;
+
+    // endregion
+
+    // region Lifecycle
 
     public NetworkManagerImpl() {
 
@@ -28,8 +36,13 @@ public class NetworkManagerImpl implements NetworkManager {
         mSearchApi = retrofit.create(SearchApi.class);
     }
 
+    // endregion
+
+    // region NetworkManager
+
     @Override
-    public MovieSearchResponse searchMovies(String titleQuery) {
+    @NonNull
+    public MovieSearchResponse searchMovies(@Nullable String titleQuery) {
 
         return mSearchApi.searchMovies(titleQuery)
                 .subscribeOn(Schedulers.io())
@@ -39,11 +52,25 @@ public class NetworkManagerImpl implements NetworkManager {
             public MovieSearchResponse apply(@NonNull Throwable throwable) throws Exception {
 
                 // Any error is fine, just return an empty list
-                MovieSearchResponse movieSearchResponse = new MovieSearchResponse();
-                movieSearchResponse.movieSearchItemList = new ArrayList<>();
-                return movieSearchResponse;
+                // Will be thrown if titleQuery is null
+
+                return getEmptyMovieSearchResponse();
             }
         })
                 .blockingFirst();
     }
+
+    // endregion
+
+    // region Data Helpers
+
+    @NonNull
+    private MovieSearchResponse getEmptyMovieSearchResponse() {
+
+        MovieSearchResponse movieSearchResponse = new MovieSearchResponse();
+        movieSearchResponse.movieSearchItemList = new ArrayList<>();
+        return movieSearchResponse;
+    }
+
+    // endregion
 }

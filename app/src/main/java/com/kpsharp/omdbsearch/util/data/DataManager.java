@@ -2,6 +2,7 @@ package com.kpsharp.omdbsearch.util.data;
 
 import com.kpsharp.omdbsearch.models.Movie;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public interface DataManager {
      * Gets the {@link BehaviorSubject} to subscribe to whenever our {@link Movie} list is updated
      * @return The BehaviorSubject
      */
+    @NonNull
     BehaviorSubject<List<Movie>> getSearchSubscription();
 
     /**

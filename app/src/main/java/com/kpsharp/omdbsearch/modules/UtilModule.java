@@ -18,34 +18,42 @@ import dagger.Provides;
 @Module
 public class UtilModule {
 
+    // region Lifecycle
+
     public UtilModule() {
     }
 
+    // endregion
+
+    // region Provides
+
     @Provides
     @Singleton
-    public NetworkManager provideNetworkManager() {
+    NetworkManager provideNetworkManager() {
 
         return new NetworkManagerImpl();
     }
 
     @Provides
     @Singleton
-    public DataManager provideDataManager(NetworkManager networkManager) {
+    DataManager provideDataManager(NetworkManager networkManager) {
 
         return new DataManagerImpl(networkManager);
     }
 
     @Provides
     @Singleton
-    public ImageUtil provideImageUtil(Context context) {
+    ImageUtil provideImageUtil(Context context) {
 
         return new ImageUtilImpl(context);
     }
 
     @Provides
     @Singleton
-    public Context provideContext() {
+    Context provideContext() {
 
         return BaseApplication.getContext();
     }
+
+    // endregion
 }

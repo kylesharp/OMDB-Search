@@ -12,9 +12,13 @@ import dagger.Component;
 @Component(modules={PresenterModule.class, UtilModule.class})
 public interface ApplicationComponent {
 
+    // region Injects
+
     void inject(MovieListActivity movieListActivity);
 
     void inject(MovieListPresenter movieListPresenter);
 
     void inject(MovieListItemViewHolder movieListItemViewHolder);
+
+    // endregion
 }

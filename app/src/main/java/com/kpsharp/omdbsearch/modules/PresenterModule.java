@@ -8,12 +8,20 @@ import dagger.Provides;
 @Module
 public class PresenterModule {
 
+    // region Lifecycle
+
     public PresenterModule() {
     }
+
+    // endregion
+
+    // region Provides
 
     @Provides
     MovieListPresenter providesMovieListPresenter() {
 
         return new MovieListPresenter();
     }
+
+    // endregion
 }
