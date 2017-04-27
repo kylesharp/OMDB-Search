@@ -2,6 +2,7 @@ package com.kpsharp.omdbsearch.ui;
 
 import com.kpsharp.omdbsearch.R;
 import com.kpsharp.omdbsearch.models.Movie;
+import com.kpsharp.omdbsearch.modules.DaggerUtil;
 import com.kpsharp.omdbsearch.ui.movielist.MovieListAdapter;
 import com.kpsharp.omdbsearch.ui.movielist.MovieListMvp;
 import com.kpsharp.omdbsearch.ui.movielist.MovieListPresenter;
@@ -13,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements MovieListMvp.View
 
     private MovieListAdapter mMovieListAdapter;
 
-    private MovieListPresenter mMovieListPresenter;
+    @Inject
+    MovieListPresenter mMovieListPresenter;
 
     // endregion
 
@@ -40,9 +44,9 @@ public class MainActivity extends AppCompatActivity implements MovieListMvp.View
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        DaggerUtil.getInstance().getApplicationComponent().inject(this);
 
-        mMovieListPresenter = new MovieListPresenter();
+        setContentView(R.layout.activity_main);
 
         loadViews();
     }

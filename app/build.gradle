@@ -23,13 +23,28 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     def android_support_version = '25.3.1'
-    def butterknfie_version = '8.5.1'
+    def butterknife_version = '8.5.1'
+    def rxjava_version = '2.0.9'
+    def rxandroid_version = '2.0.1'
+    def gson_version = '2.2.0'
+    def retrofit_rxjava_adapter_version = '2.2.0'
+    def dagger_version = '2.9'
+    def jsr_version = '1.0'
 
     compile "com.android.support:appcompat-v7:${android_support_version}"
     compile "com.android.support:recyclerview-v7:${android_support_version}"
 
-    compile "com.jakewharton:butterknife:${butterknfie_version}"
-    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknfie_version}"
+    compile "com.jakewharton:butterknife:${butterknife_version}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterknife_version}"
+
+    compile "com.google.dagger:dagger:${dagger_version}"
+    annotationProcessor "com.google.dagger:dagger-compiler:${dagger_version}"
+    provided "javax.annotation:jsr250-api:${jsr_version}"
+
+    compile "io.reactivex.rxjava2:rxjava:${rxjava_version}"
+    compile "io.reactivex.rxjava2:rxandroid:${rxandroid_version}"
+    compile "com.squareup.retrofit2:converter-gson:${gson_version}"
+    compile "com.squareup.retrofit2:adapter-rxjava2:${retrofit_rxjava_adapter_version}"
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
