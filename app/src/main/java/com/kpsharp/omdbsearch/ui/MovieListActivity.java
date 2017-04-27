@@ -10,6 +10,8 @@ import com.kpsharp.omdbsearch.ui.movielist.MovieListPresenter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 
@@ -20,7 +22,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MovieListMvp.View, SearchView.OnQueryTextListener {
+public class MovieListActivity extends AppCompatActivity implements MovieListMvp.View, SearchView.OnQueryTextListener {
 
     // region Variables
 
@@ -87,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements MovieListMvp.View
         mMovieTitleSearchView.setQueryHint(getResources().getString(R.string.movie_list_search_view_hint));
         mMovieTitleSearchView.setOnQueryTextListener(this);
 
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mMovieRecyclerView.setLayoutManager(gridLayoutManager);
+
         mMovieListAdapter = new MovieListAdapter(this);
 
         mMovieRecyclerView.setAdapter(mMovieListAdapter);
@@ -95,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements MovieListMvp.View
     // endregion
     // endregion
 
-    // region OnClickListener
+    // region OnQueryTextListener
 
     @Override
     public boolean onQueryTextChange(String newText) {

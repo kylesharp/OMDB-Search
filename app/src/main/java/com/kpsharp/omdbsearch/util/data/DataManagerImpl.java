@@ -48,7 +48,7 @@ public class DataManagerImpl implements DataManager {
 
         for (MovieSearchItem movieSearchItem : movieSearchResponse.movieSearchItemList) {
 
-            movieList.add(new Movie(movieSearchItem.title));
+            movieList.add(new Movie(movieSearchItem.title, movieSearchItem.poster));
         }
 
         return movieList;

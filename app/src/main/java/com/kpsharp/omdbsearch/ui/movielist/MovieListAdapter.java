@@ -9,11 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieListAdapter extends RecyclerView.Adapter {
+interface MovieListAdapterCallback {
+
+    void onMovieClicked(Movie movie);
+}
+
+public class MovieListAdapter extends RecyclerView.Adapter implements MovieListAdapterCallback {
+
 
     // region Variables
 
@@ -40,7 +47,7 @@ public class MovieListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         if (holder instanceof MovieListItemViewHolder) {
-            ((MovieListItemViewHolder) holder).bindViewHolder(mMovieList.get(position));
+            ((MovieListItemViewHolder) holder).bindViewHolder(mMovieList.get(position), this);
         }
         else {
             throw new IllegalStateException("Received an unexpected ViewHolder type");
@@ -52,6 +59,17 @@ public class MovieListAdapter extends RecyclerView.Adapter {
 
         return mMovieList.size();
     }
+
+    // endregion
+
+    // region MovieListAdapterCallback
+
+    @Override
+    public void onMovieClicked(Movie movie) {
+
+        Toast.makeText(mContext, "Clicked on " + movie.getTitle(), Toast.LENGTH_SHORT).show();
+    }
+
     // endregion
 
     // region Data

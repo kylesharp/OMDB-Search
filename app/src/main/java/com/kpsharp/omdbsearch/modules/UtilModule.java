@@ -1,9 +1,14 @@
 package com.kpsharp.omdbsearch.modules;
 
+import com.kpsharp.omdbsearch.BaseApplication;
 import com.kpsharp.omdbsearch.util.data.DataManager;
 import com.kpsharp.omdbsearch.util.data.DataManagerImpl;
+import com.kpsharp.omdbsearch.util.image.ImageUtil;
+import com.kpsharp.omdbsearch.util.image.ImageUtilImpl;
 import com.kpsharp.omdbsearch.util.network.NetworkManager;
 import com.kpsharp.omdbsearch.util.network.NetworkManagerImpl;
+
+import android.content.Context;
 
 import javax.inject.Singleton;
 
@@ -28,5 +33,19 @@ public class UtilModule {
     public DataManager provideDataManager(NetworkManager networkManager) {
 
         return new DataManagerImpl(networkManager);
+    }
+
+    @Provides
+    @Singleton
+    public ImageUtil provideImageUtil(Context context) {
+
+        return new ImageUtilImpl(context);
+    }
+
+    @Provides
+    @Singleton
+    public Context provideContext() {
+
+        return BaseApplication.getContext();
     }
 }
