@@ -1,6 +1,6 @@
 package com.kpsharp.omdbsearch.modules;
 
-import com.kpsharp.omdbsearch.ui.MovieListActivity;
+import com.kpsharp.omdbsearch.ui.movielist.MovieListActivity;
 import com.kpsharp.omdbsearch.ui.movielist.MovieListItemViewHolder;
 import com.kpsharp.omdbsearch.ui.movielist.MovieListPresenter;
 
