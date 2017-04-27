@@ -17,7 +17,7 @@ public class DaggerUtil {
         return mApplicationComponent;
     }
 
-    //For tests
+    // For tests
     public void setApplicationComponent(ApplicationComponent applicationComponent) {
         mApplicationComponent = applicationComponent;
     }

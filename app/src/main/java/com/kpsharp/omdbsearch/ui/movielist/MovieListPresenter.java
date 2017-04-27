@@ -1,24 +1,27 @@
 package com.kpsharp.omdbsearch.ui.movielist;
 
+import com.kpsharp.omdbsearch.modules.DaggerUtil;
 import com.kpsharp.omdbsearch.ui.base.BasePresenter;
 import com.kpsharp.omdbsearch.util.data.DataManager;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
+import javax.inject.Inject;
 
 public class MovieListPresenter extends BasePresenter<MovieListMvp.View> implements MovieListMvp.Presenter {
 
     // region Variables
 
-    private DataManager mDataManager;
+    @Inject
+    DataManager mDataManager;
 
     // endregion
 
     // region Lifecycle
 
-    public MovieListPresenter(@NonNull DataManager dataManager) {
+    public MovieListPresenter() {
 
-        mDataManager = dataManager;
+        DaggerUtil.getInstance().getApplicationComponent().inject(this);
     }
 
     // endregion
