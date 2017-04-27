@@ -1,6 +1,7 @@
 <resources>
     <!-- General -->
     <string name="app_name">OMDB Search</string>
+    <string name="movie_list_search_view_hint">Type a movie title</string>
 
     <!-- Content Descriptions -->
     <string name="movie_list_poster_description">Movie Poster</string>
