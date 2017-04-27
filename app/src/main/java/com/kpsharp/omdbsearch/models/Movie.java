@@ -7,6 +7,7 @@ public class Movie {
 
     private String mTitle;
     private String mPosterUrl;
+    private String mImdbId;
 
     public Movie() {
 
@@ -14,10 +15,11 @@ public class Movie {
         mPosterUrl = "";
     }
 
-    public Movie(@Nullable String title, @Nullable String posterUrl) {
+    public Movie(@Nullable String title, @Nullable String posterUrl, @Nullable String imdbId) {
 
         mTitle = title != null ? title : "";
         mPosterUrl = posterUrl != null ? posterUrl : "";
+        mImdbId = imdbId != null ? imdbId : "";
     }
 
     @NonNull
@@ -26,8 +28,15 @@ public class Movie {
         return mTitle;
     }
 
+    @NonNull
     public String getPosterUrl() {
 
         return mPosterUrl;
+    }
+
+    @NonNull
+    public String getImdbId() {
+
+        return mImdbId;
     }
 }
