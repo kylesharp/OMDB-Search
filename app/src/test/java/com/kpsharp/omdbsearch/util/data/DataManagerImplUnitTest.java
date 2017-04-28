@@ -14,16 +14,16 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.subjects.BehaviorSubject;
 
-import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertSame;
 import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.Silent.class)
 public class DataManagerImplUnitTest extends BaseUnitTest {
 
     // region Variables
 
-    private DataManager mDataManager;
+    private DataManagerImpl mDataManagerImpl;
 
     // endregion
 
@@ -34,7 +34,7 @@ public class DataManagerImplUnitTest extends BaseUnitTest {
 
         super.setUp();
 
-        mDataManager = new DataManagerImpl(mNetworkManager);
+        mDataManagerImpl = new DataManagerImpl(mNetworkManager);
     }
 
     // endregion
@@ -44,29 +44,27 @@ public class DataManagerImplUnitTest extends BaseUnitTest {
     @Test
     public void testGetSearchSubscriptionIsNotNull() throws Exception {
 
-        assertNotNull(mDataManager.getSearchSubscription());
+        assertNotNull(mDataManagerImpl.getSearchSubscription());
     }
 
     @Test
     public void testGetSearchSubscriptionIsInitializedOnce() throws Exception {
 
-        BehaviorSubject<List<Movie>> firstBehaviorSubject = mDataManager.getSearchSubscription();
-        BehaviorSubject<List<Movie>> secondBehaviorSubject = mDataManager.getSearchSubscription();
+        BehaviorSubject<List<Movie>> firstBehaviorSubject = mDataManagerImpl.getSearchSubscription();
+        BehaviorSubject<List<Movie>> secondBehaviorSubject = mDataManagerImpl.getSearchSubscription();
 
-        assertEquals(firstBehaviorSubject, secondBehaviorSubject);
+        assertSame(firstBehaviorSubject, secondBehaviorSubject);
     }
 
     @Test
     public void testSearchForMoviesHandlesEmptyQuery() throws Exception {
 
-        mDataManager.getSearchSubscription().subscribe(new Consumer<List<Movie>>() {
+        mDataManagerImpl.getSearchSubscription().subscribe(new Consumer<List<Movie>>() {
 
             @Override
             public void accept(@NonNull List<Movie> movies) throws Exception {
 
-                assertNotNull(movies);
-
-                assertEquals(movies.size(), 0);
+                UnitTestUtil.assertStandardMovieList(movies, 0);
             }
         });
 
@@ -74,26 +72,18 @@ public class DataManagerImplUnitTest extends BaseUnitTest {
 
         when(mNetworkManager.searchMovies(query)).thenReturn(UnitTestUtil.generateMovieSearchResponse(0));
 
-        mDataManager.searchForMovies(query);
+        mDataManagerImpl.searchForMovies(query);
     }
 
     @Test
     public void testSearchForMoviesForRealResults() throws Exception {
 
-        mDataManager.getSearchSubscription().subscribe(new Consumer<List<Movie>>() {
+        mDataManagerImpl.getSearchSubscription().subscribe(new Consumer<List<Movie>>() {
 
             @Override
             public void accept(@NonNull List<Movie> movies) throws Exception {
 
-                assertNotNull(movies);
-
-                assertEquals(movies.size(), 5);
-
-                for (int i=0; i<5; i++) {
-                    assertEquals("title_" + Integer.toString(i), movies.get(i).getTitle());
-                    assertEquals("poster_" + Integer.toString(i), movies.get(i).getPosterUrl());
-                    assertEquals("imdb_" + Integer.toString(i), movies.get(i).getImdbId());
-                }
+                UnitTestUtil.assertStandardMovieList(movies, 5);
             }
         });
 
@@ -101,7 +91,7 @@ public class DataManagerImplUnitTest extends BaseUnitTest {
 
         when(mNetworkManager.searchMovies(query)).thenReturn(UnitTestUtil.generateMovieSearchResponse(5));
 
-        mDataManager.searchForMovies(query);
+        mDataManagerImpl.searchForMovies(query);
     }
 
     // endregion

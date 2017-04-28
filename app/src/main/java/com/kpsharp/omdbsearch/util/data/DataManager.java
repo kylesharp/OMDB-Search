@@ -7,9 +7,22 @@ import android.support.annotation.Nullable;
 
 import java.util.List;
 
+import io.reactivex.Scheduler;
 import io.reactivex.subjects.BehaviorSubject;
 
 public interface DataManager {
+
+    /**
+     * Gets the main thread scheduler
+     * @return The {@link Scheduler} scheduler for the main thread
+     */
+    Scheduler getMainThreadScheduler();
+
+    /**
+     * Gets the IO thread scheduler
+     * @return The {@link Scheduler} scheduler for the IO thread
+     */
+    Scheduler getIOThreadScheduler();
 
     /**
      * Gets the {@link BehaviorSubject} to subscribe to whenever our {@link Movie} list is updated

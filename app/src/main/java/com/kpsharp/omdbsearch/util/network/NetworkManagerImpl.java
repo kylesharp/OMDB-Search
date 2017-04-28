@@ -4,6 +4,7 @@ import com.kpsharp.omdbsearch.util.network.responses.MovieSearchResponse;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.ArrayList;
 
@@ -70,6 +71,16 @@ public class NetworkManagerImpl implements NetworkManager {
         MovieSearchResponse movieSearchResponse = new MovieSearchResponse();
         movieSearchResponse.movieSearchItemList = new ArrayList<>();
         return movieSearchResponse;
+    }
+
+    // endregion
+
+    // region Testing
+
+    @VisibleForTesting
+    public void setSearchApi(SearchApi searchApi) {
+
+        mSearchApi = searchApi;
     }
 
     // endregion

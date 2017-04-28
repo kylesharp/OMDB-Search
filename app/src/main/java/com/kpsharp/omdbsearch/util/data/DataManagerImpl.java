@@ -11,6 +11,9 @@ import android.support.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
 
 public class DataManagerImpl implements DataManager {
@@ -34,6 +37,18 @@ public class DataManagerImpl implements DataManager {
     // endregion
 
     // region DataManager
+
+    @Override
+    public Scheduler getMainThreadScheduler() {
+
+        return AndroidSchedulers.mainThread();
+    }
+
+    @Override
+    public Scheduler getIOThreadScheduler() {
+
+        return Schedulers.io();
+    }
 
     // This is a public method, but we also lazily load mBehaviorSubject, so we need to use this inside this class instead of direct access
     @Override
