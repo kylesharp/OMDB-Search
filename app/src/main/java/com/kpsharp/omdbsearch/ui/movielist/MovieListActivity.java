@@ -48,14 +48,14 @@ public class MovieListActivity extends AppCompatActivity implements MovieListMvp
         setContentView(R.layout.activity_main);
 
         loadViews();
-
-        mMovieListPresenter.attachView(this);
     }
 
     @Override
     protected void onResume() {
 
         super.onResume();
+
+        mMovieListPresenter.attachView(this);
 
         mMovieListPresenter.subscribeToObservables();
     }
@@ -65,15 +65,9 @@ public class MovieListActivity extends AppCompatActivity implements MovieListMvp
 
         mMovieListPresenter.unsubscribeFromObservables();
 
-        super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-
         mMovieListPresenter.detachView();
 
-        super.onDestroy();
+        super.onPause();
     }
 
     // region Lifecycle Helpers

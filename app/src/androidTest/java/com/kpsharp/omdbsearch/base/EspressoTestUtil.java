@@ -4,13 +4,15 @@ import com.kpsharp.omdbsearch.models.Movie;
 import com.kpsharp.omdbsearch.util.network.responses.MovieSearchItem;
 import com.kpsharp.omdbsearch.util.network.responses.MovieSearchResponse;
 
+import android.support.test.InstrumentationRegistry;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 
-public class UnitTestUtil {
+public class EspressoTestUtil {
 
     // region Generators
     // region Network Responses
@@ -58,7 +60,7 @@ public class UnitTestUtil {
 
         String indexString = Integer.toString(index);
 
-        return new Movie("title_" + indexString, "posterUrl_" + indexString, "imdbId_" + indexString);
+        return new Movie("title_" + indexString, "android.resource://" + InstrumentationRegistry.getContext().getPackageName() + "/" + com.kpsharp.omdbsearch.test.R.mipmap.poster, "imdbId_" + indexString);
     }
 
     // endregion
